@@ -1,0 +1,201 @@
+\documentclass[11pt]{article}
+%\usepackage[top=1cm,bottom=1cm,left=1cm,right=1cm]{geometry}
+%	packages
+\usepackage{amsmath}
+\usepackage{amssymb} 
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{decorations.markings}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.3}
+\usetikzlibrary{calc}
+\usetikzlibrary{matrix}
+\newcommand{\midarrow}{\tikz \draw[-stealth'] (0,0) -- +(.1,0);}
+\newcommand{\midarrowThick}{\tikz \draw[-stealth', thick] (0,0) -- +(.1,0);}
+
+
+\pgfplotstableread{
+x y yerr
+0 1 0
+0.05 0.974026194 5.0015036962526005E-5
+0.093728389 0.9497410694 7.78971366252664E-5
+0.1371069322 0.924865939 1.0093821622096843E-4
+0.1798040456 0.898811946 1.0651853692450307E-4
+0.2217880628 0.871624923 1.1508628021120124E-4
+0.2626927994 0.8428041434 1.2864774472325064E-4
+0.3027913772 0.8129060099 1.4902787365413095E-4
+}{\AltruistUnstable}
+
+\pgfplotstableread{
+x y yerr
+0.3027913772 0.8129060099 1.4902787365413095E-4
+0.3423064956 0.7822476237 1.6146129496604302E-4
+0.3801766569 0.7494890345 1.6658619859951144E-4
+0.4164223018 0.7149635528 1.6485959773519785E-4
+0.452652036 0.6805045115 2.0150928163502896E-4
+0.4841675083 0.6409772501 1.7297219712992195E-4
+0.5146358963 0.6012906588 2.0496950229381038E-4
+0.5410462078 0.5585307779 1.96315224540297E-4
+0.563759559 0.5137912729 2.2763516131665576E-4
+0.5852364138 0.4686201186 2.0592528851481716E-4
+0.6000541661 0.4203015414 2.379022251150445E-4
+0.613658005 0.3721750825 2.2763347553763998E-4
+0.6183121677 0.3215288708 2.0077314724822157E-4
+}{\AltruistStable}
+
+\pgfplotstableread{
+x y yerr
+0.6183121677 0.3215288708 2.0077314724822157E-4
+0.6156078692 0.271068859 1.7484371834740363E-4
+0.6117888767 0.2212017764 1.7727998925342283E-4
+0.5958807362 0.1722736633 1.7140035072693523E-4
+0.5853016489 0.1231369029 1.4636829996285728E-4
+%0.5508416024 0.0794662597 1.218099255762709E-4
+0.55 0.05 0
+%0.5363062693 0.0221923773 6.541619010621858E-5
+0.5 0 0
+}{\AltruistSaddle}
+
+\pgfplotstableread{
+x y yerr
+0 1 0
+0.05 0.9149689724 1.0214461514107452E-4
+0.0750988867 0.8717240094 1.2969546216876982E-4
+0.1004626039 0.8286336868 1.5127109331178614E-4
+0.1251047633 0.785119734 1.558046627454721E-4
+0.1508652298 0.7422471291 1.7874597268779623E-4
+0.1752519335 0.6985684689 1.849123437424024E-4
+0.1999989253 0.6551200103 1.7891332576939955E-4
+0.2247450155 0.6116731345 2.0069037461967957E-4
+0.2500654389 0.5685533823 2.0872850519736063E-4
+0.2746560077 0.5250101169 1.9599655309257064E-4
+0.2989430188 0.4813035975 2.085350438654867E-4
+0.3243013008 0.4381937246 2.0556159121486262E-4
+
+}{\SelfishStableF}
+
+\pgfplotstableread{
+x y yerr
+0.3243013008 0.4381937246 2.0556159121486262E-4
+0.3482522047 0.3942734394 2.165433738562226E-4
+0.3720361601 0.3502921437 1.774623686763922E-4
+0.396920509 0.3069062639 1.7655350203654165E-4
+0.4210471813 0.2631038552 1.874603530845245E-4
+0.4455118014 0.2194288492 1.9700605499422356E-4
+0.4733899851 0.177591963 1.5363241518479768E-4
+0.4949339227 0.1306961003 1.4708148792545096E-4
+0.5201260331 0.0868210231 1.3009854708153027E-4
+0.5450223064 0.0434611816 8.716824789843322E-5
+0.5699185798 1.0134004287897652E-4 4.437868753393406E-6
+}{\SelfishUnstableF}
+
+\pgfplotstableread{
+x	y
+0 1 
+0.05 0.9063234766 
+0.0735437766 0.8622134938 
+0.0970875532 0.818103511 
+0.1206313298 0.7739935282 
+0.1401952381 0.7277592841 
+0.1620473027 0.6827138087 
+0.1838705466 0.6377277439 
+0.2056937905 0.5927416791 
+0.2249725557 0.5465212592 
+0.2442205564 0.5003745966 
+0.2634685571 0.454227934 
+0.286454171 0.4096402483 
+0.3042409078 0.362556674
+0.3219105961 0.3157829408 
+}{\SelfishStable}
+
+\pgfplotstableread{
+x	y
+%0.3042409078 0.362556674 
+0.3219105961 0.3157829408 
+%0.3378661637 0.2683616652 
+%0.3538110279 0.2209722011 
+%0.3662177558 0.1723922804 
+%0.42 0
+0.5 0
+}{\SelfishUnstable}
+
+\pagestyle{empty}
+\begin{document}
+
+\begin{figure}
+\hspace*{-2cm}
+	\begin{tikzpicture}[scale=1.5]
+
+			\begin{axis}
+			[
+				%axis x line=middle, axis y line=middle, 
+				xlabel={Disease}, ylabel={Number of Agents},
+				xmin=0,ymin=-0.1,xmax=1,ymax=1,
+				%x=0.8\textwidth,y=0.8\textwidth,
+				width=0.8\textwidth,
+				ylabel style={text width=3.3cm}
+				%xtick=\empty, ytick=\empty
+			]
+			
+			% altruist unstable
+			\addplot[smooth, ultra thick, dashed, purple] table [] {\AltruistUnstable};
+			% altruist stable
+			\addplot[smooth, ultra thick, purple] table [] {\AltruistStable};
+			% altruist saddle
+			\addplot[smooth, ultra thick, purple, dashed] table [] {\AltruistSaddle};
+			% selfish stable
+			\addplot[smooth, ultra thick, green!80] table [] {\SelfishStable};
+			% selfish unstable
+			\addplot[smooth, ultra  thick, dashed, green!80] table [] {\SelfishUnstable};
+			% void unstable 1 
+			\addplot[smooth, ultra thick, black, dashed] coordinates {(0,0) (0.5,0)};
+			% void unstable 2
+			%\addplot[smooth, ultra thick, black, dashed] coordinates {(0.52,0) (0.56,0)};
+			% void stable  
+			\addplot[smooth, ultra thick, black] coordinates {(0.5,0) (1,0)};
+				
+			
+			% region lines
+			\addplot[black!30] coordinates { (0.62,-0.1) (0.62,1.1) }; % 5-6
+			%\addplot[black!30] coordinates { (0.57,-0.1) (0.57,1.1) }; % 4-5
+			\addplot[black!30] coordinates { (0.5,-0.1) (0.5,1.1) }; % 3-4
+			\addplot[black!30] coordinates { (0.3,-0.1) (0.3,1.1) };	% 2-3
+			\addplot[black!30] coordinates { (0.324,-0.1) (0.324,1.1) }; % 1-2	
+			% region labels
+			\node[] at (axis cs:0.8,-0.05) {$(5)$};	
+			%\node[] at (axis cs:0.595,-0.05) {$(5)$};	
+			\node[] at (axis cs:0.56,-0.05) {$(4)$};	
+			\node[] at (axis cs:0.43,-0.05) {$(3)$};	
+			\node[] at (axis cs:0.312,-0.05) {$(2)$};
+			\node[] at (axis cs:0.125,-0.05) {$(1)$};
+			
+			%\legend{ , Altruist (N$_S$=0), , Selfish (N$_A$=0),  , ,  Empty (N$_A$=N$_S$=0)};
+			\legend{ , Altruist, , Selfish,  , ,  Empty};
+			\end{axis}
+	\end{tikzpicture}
+	%\caption{Bifurcation curve for the altruism model. Stability is indicated by solid (dashed) lines for stable (unstable) branches and numbers indicate regions of behaviour separated by bifurcation points. Note region 2 occurs at a single value of Disease \label{fig:altruistBifurcation}}
+\end{figure}	
+~
+
+\newpage
+
+From Fig.~\ref{fig:} we can see several bifurcations occurring in the system. Each branch is computed separately with either the number of altruists ($N_A$) and/or the number of selfish ($N_S$) agents set to zero as indicated in the plot legend. Note that this is a composite graph of three separate computations and in each case there is a conservation of the total number of agents equal to unity. Thus when the selfish branch reaches 0.6 on the $y-axis$, this corresponds to 60\% of the population is selfish and the remaining 40\% are empty, and like-wise for the altruist branch. For the empty branch, the black line in Fig.~\ref{fig:} refers to an entire population of empty states and is included for clarity of collisions with the other branches. Initially we can see that the dependence of the selfish agents on $D$ is linear, whereas the altruists vary in a non-linear manor. Altruistic agents can also survive at slightly larger values of $D$ than the selfish agents, though do so at much large population size than the selfish agents at given value of $D$.
+
+Looking at the stability of the branches also yields some insight into the dynamics of the system. Grey lines and parenthesis in Fig.~\ref{fig:} show bifurcations in the system indicated by changes in stability of the of the eigenvalues of the Jacobian (here estimated via finite differencing). In region $(1)$ the only stable state is one with only selfish agents and empty states. Any altruists in this regime will eventually die out in the presences of selfish agents. As there is no regeneration in this model, in the absence of selfish agents in this regime, the altruist branch is metastable. 
+
+In region $(2)$ the altruist branch becomes stable meaning the system is now bi-stable where both agents can survive in this regime in the presence of the other. The winner of this battle is dependent on the initial conditions of the system due to an unstable branch in between the two stable paths. This unstable branch corresponds to a population of both altruists and selfish agents, i.e. $0<N_A<1$ and $0<N_S<1$, thus can not connect the two stable branches in Fig.~\ref{fig:} in a meaningful way. This highly unstable branch corresponds to solutions in the conserved agents space ($f(N_A,N_S,N_E)$) away from the boundaries where the curves in Fig.~\ref{fig:} lie. 
+
+When $D$ is increased further, the selfish branch loses stability, and the system undergoes another bifurcation returning it to a state with only one stable fixed point. In this regime, $(3)$, the selfish agents can not survive for long periods and eventually die out leaving only the altruist and empty states. The cooperative nature of the altruistic agents, they are able to survive as a large population at a given $D$ compared to the selfish agents. 
+
+Region $(4)$ sees a transcritical bifurcation in the empty state where an unstable altruist state, in addition to the existing stable branch, is born from the empty state. The size of the population of altruist agents on this branch increase with $D$.
+
+At $D$=0.56, the boundary of region $(4)$ and $(5)$, the selfish branch collides with the empty branch. This collision causes both unstable branches to become a single stable branch, along the path of the empty state and is an example of a transcritical bifurcation. For $D>0.56$, in region $(5)$ and $(6)$, there is no state (stable or unstable) where selfish agents can survive and any configuration of the system will result in an exponential decay in the selfish agents. 
+
+At $D$=0.61 the altruist branch exhibits a saddle node bifurcation, commonly referred to as a tipping point. At this point the stable altruist branch `disappears' when observing the outcome of the simulation only. This is a consequence of the new unstable altruist branch colliding with the stable altruist branch causing both branches to `vanish'. In the context of the model, the altruistic agents survive in difficult environmental conditions ($H$ and $D$) through cooperation. This enables them to survive at large population sizes compared to selfish agents. At the tipping point the conditions are too difficult for the population to be maintained and the agents begin to die and thus there are less agents to support the population and they all die out. The altruistic agents do not degrade gracefully as in the selfish case, giving rise to the tipping point. The presences of the tipping point leads to a sudden transition from regime $(5)$ with a stable altruist state, to region $(6)$ where the only state is stable where all agents are dead and only empty states exist. 
+
+In this simple ABM we have discovered several bifurcations, including saddle-node and transcritical bifurcations. Our algorithm has highlighted the difference in agent dependence on $D$ and uncovered the dynamical behaviour of the system. 
+
+\end{document}

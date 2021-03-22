@@ -1,0 +1,109 @@
+\documentclass{standalone}
+%\usepackage[top=1cm,bottom=1cm,left=1cm,right=1cm]{geometry}
+%	packages
+\usepackage{amsmath}
+\usepackage{amssymb} 
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{decorations.markings}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.3}
+\usetikzlibrary{calc}
+\usetikzlibrary{matrix}
+\newcommand{\midarrow}{\tikz \draw[-stealth'] (0,0) -- +(.1,0);}
+\newcommand{\midarrowThick}{\tikz \draw[-stealth', thick] (0,0) -- +(.1,0);}
+
+% Gaussian
+\pgfmathdeclarefunction{gauss}{3}{%
+  \pgfmathparse{#3*1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+}
+
+\pagestyle{empty}
+\begin{document}
+
+
+	\begin{tikzpicture}[scale=1 ]	
+	
+	%% Numerical Continaution
+	\node[](NC) at (0,0) {
+	
+		\begin{tikzpicture}
+					\begin{axis}
+					[
+						xlabel={ }, ylabel={ },
+						xmin=0.1,ymin=-0.1,xmax=2.3,ymax=0.5,
+						width=0.45\textwidth,
+						xtick=\empty, ytick=\empty,
+						xtick pos = left, 
+						ytick pos = left
+					]
+					
+				%	\node[] at (axis cs:0.2,0.85) {(a)};	
+				
+					%stability curve	
+					\addplot[smooth, tension=0.7, thick] 
+						coordinates {(-0.1,0) (1,0) (2.5,0.8) (3.2,1.5)};	
+					% u0
+					\addplot[color=black,solid,thick,mark=*, mark options={fill=black}]
+						coordinates {(0.4,-0.07)}; 
+					% u1
+					\addplot[color=black,solid,thick,mark=*, mark options={fill=black}]
+						coordinates {(1,0)}; 
+					%\node [above left] at (axis cs: 1, 0) {$u_0$};
+					% u2
+					\addplot[color=black,solid,thick,mark=*, mark options={fill=black}]
+						coordinates {(1.85,0.4)} {}; %node[pin=110:{\tiny Corrected Solution}] {}; 
+			
+					\addplot[->] coordinates {(1,0) (2.0,0.15)};
+					\addplot[dotted] coordinates {(1,0) (0.4,-0.07)};
+					\addplot[color=black,solid,thick,mark=*, mark options={fill=white}]
+						coordinates {(2.085,0.16)} {}; %node[pin=270:{\tiny Predicted Solution}] {}; 
+					\addplot[->] coordinates {(2.085,0.16) (1.89,0.37)};
+						
+					\end{axis}
+					
+			\end{tikzpicture}
+	};
+	\node[above of = NC, yshift=3em, xshift=0em](NClabel) {Numerical Continuation};
+	
+	%% Lifting
+	\node[above left of = NC, yshift=10.75em, xshift=-15em](Lift) {};
+	\node[draw, above of = Lift, yshift=0em, xshift=0em, text width=5cm, align=center](LiftLabel) {Initialise Microscopic \\State for $M$ Realisations \\(Lifting)};
+%	\node[below of = Lift, yshift=0em, xshift=0em, text width=4cm, align=center](LiftLabel2) {$\tilde{X}_i^0 \rightarrow x_i^0$};
+		
+	
+	%% Bracket (Lift)
+	\draw [decorate,decoration={brace,amplitude=10pt,raise=4pt,mirror},yshift=0pt,rotate=0]
+		(-3,4.5) -- (-3,6.5) node [black,midway,xshift=0cm] {};
+	
+	\node[draw, above of = NC, yshift=9em, xshift=0em, text width=3cm, align=center](LiftLabel) {$M$ Independent Simulations\\(Evolve)};	
+	
+	\draw [->, ultra thick] (-1.5,5.5) -- node [auto] {}  (1.5,5.5); 
+	
+	
+	%% Restricting
+	\node[above right of = NC, yshift=10.75em, xshift=15em](Restrict) {}; % ghost node
+	
+	%% Ensemble of restrictions
+	\node[below of = Restrict, yshift=-0.6em](PDF) {};
+%	\node[draw,dotted] {A};
+	\node[draw, above of = Restrict, yshift=0em, xshift=0em, text width=5cm, align=center](RestrictLabel) {Estimate Macroscopic \\State from $M$ Realisations\\ (Restrict)};
+	
+	%\node[below of = PDF, yshift=0em, xshift=0em, text width=4cm, align=center](RestrictLabel2) {$\tilde{x}_i \rightarrow \tilde{X}_i^\tau$};
+	
+	
+	%% Bracket (Restrict)
+	\draw [decorate,decoration={brace,amplitude=10pt,raise=4pt},yshift=0pt,rotate=0]
+		(3,4.5) -- (3,6.5) node [black,midway,xshift=0cm] {};
+	
+	%% arrows
+	\draw[->, ultra thick] (RestrictLabel) |- (NC) {};
+	\draw[->, ultra thick] (NC) -|  (Lift) {};
+
+	\end{tikzpicture}
+
+
+\end{document}

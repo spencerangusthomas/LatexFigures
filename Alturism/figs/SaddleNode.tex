@@ -1,0 +1,109 @@
+\documentclass[11pt]{standalone}
+%\usepackage[top=1cm,bottom=1cm,left=1cm,right=1cm]{geometry}
+%	packages
+\usepackage{amsmath}
+\usepackage{amssymb} 
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{decorations.markings}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.3}
+\usetikzlibrary{calc}
+\usetikzlibrary{matrix}
+\newcommand{\midarrow}{\tikz \draw[-stealth'] (0,0) -- +(.1,0);}
+\newcommand{\midarrowThick}{\tikz \draw[-stealth', thick] (0,0) -- +(.1,0);}
+
+
+\pgfplotstableread{
+x	y	yerr
+0	1	0
+0.05	0.9574704523	8.52E-005
+0.085772245	0.9223549612	1.16E-004
+0.1194071343	0.8852439323	1.37E-004
+0.1509625614	0.8463633021	1.46E-004
+0.1800291517	0.8055585944	1.52E-004
+0.2054093407	0.7622492538	2.05E-004
+0.2277349123	0.7173794958	2.27E-004
+0.244212758	0.6697309441	2.22E-004
+0.2605542187	0.6224767733	2.48E-004
+0.2663148847	0.5715635468	2.57E-004
+0.271936353	0.5218805608	2.58E-004
+}{\Stable}
+
+\pgfplotstableread{
+x	y	yerr
+0.271936353	0.5218805608	2.58E-004
+0.2668182327	0.4709824253	2.62E-004
+0.2618156538	0.4212333127	2.86E-004
+0.2501074421	0.3721584927	2.58E-004
+0.2332978476	0.3247656022	2.52E-004
+0.2165837482	0.2776419503	2.47E-004
+0.1892514026	0.2342817414	2.30E-004
+0.1628460905	0.1923921842	2.31E-004
+0.1364407783	0.150502627	1.88E-004
+0.1053143222	0.1076028962	1.73E-004
+0.0707322682	0.0692942374	1.45E-004
+0.0369497001	0.0316162489	9.36E-005
+-0.0049811433	0.0046739356	3.78E-005
+}{\UnStable}
+
+\pgfplotstableread{
+x	y	yerr
+0	0	0
+0.1	0	0
+0.2	0	0
+0.3	0	0
+0.4	0	0
+0.5	0	0
+0.6	0	0
+0.7	0	0
+0.8	0	0
+0.9	0	0
+1	0	0
+}{\Dead}
+
+%\pagestyle{empty}
+\begin{document}
+
+%\begin{figure}
+%\hspace*{-2cm}
+	\begin{tikzpicture}[scale=1.5]
+
+			\begin{axis}
+			[
+				%axis x line=middle, axis y line=middle, 
+				xlabel={Disease}, ylabel={Number of Altruists},
+				xmin=0,ymin=-0.1,xmax=1,ymax=1,
+				%x=0.8\textwidth,y=0.8\textwidth,
+				width=0.8\textwidth,
+				ylabel style={text width=4cm}
+				%xtick=\empty, ytick=\empty
+			]
+
+			% upper Stable
+			\addplot[smooth, ultra thick, purple] table [] {\Stable};
+			% unStable
+			\addplot[smooth, ultra thick, dashed, purple] table [] {\UnStable};
+			% Stable2
+			\addplot[smooth, ultra thick, black] table [] {\Dead};
+			
+				
+			% Saddle Nodes
+			\node[anchor=west] (source) at (axis cs:0.5,0.55) {SN at (0.27,0.54)};
+			\node (destination) at (axis cs:0.27,0.52){};
+			\draw[->, thick] (source)--(destination);
+			\node[anchor=west] (source2) at (axis cs:0.5,0.1) {SN at (0.00,0.00)};
+			\node (destination2) at (axis cs:0.05,0.025){};
+			\draw[->, thick] (source2)--(destination2);
+
+			
+			%\legend{ , Altruist (N$_S$=0), Selfish (N$_A$=0),  , , , Empty (N$_A$=N$_S$=0)};
+			\end{axis}
+	\end{tikzpicture}
+	%\caption{Bifurcation curve for the altruism model. Stability is indicated by solid (dashed) lines for stable (unstable) branches and numbers indicate regions of behaviour separated by bifurcation points. Note region 2 occurs at a single value of Disease \label{fig:altruistBifurcation}}
+%\end{figure}	
+
+\end{document}

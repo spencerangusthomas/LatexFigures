@@ -1,0 +1,173 @@
+\documentclass[11pt]{article}
+%\usepackage[top=1cm,bottom=1cm,left=1cm,right=1cm]{geometry}
+
+%	packages
+\usepackage{amsmath}
+\usepackage{amssymb} 
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{decorations.markings}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.3}
+\usetikzlibrary{calc}
+\usetikzlibrary{matrix}
+\newcommand{\midarrow}{\tikz \draw[-stealth'] (0,0) -- +(.1,0);}
+\newcommand{\midarrowThick}{\tikz \draw[-stealth', thick] (0,0) -- +(.1,0);}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% names are in % of D
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pgfplotstableread{
+% D = 0.8
+% altrusit unstable
+x y err
+0 0.8716009668 3.858507324017815E-4
+0.05 0.8653512186 3.970017423878446E-4
+0.0993062735 0.8566884198 4.233335954184841E-4
+0.1485519855 0.8480362613 4.0614727767888367E-4
+0.1977976975 0.8393841027 4.5416058773407734E-4
+0.246621909 0.8283328787 4.375832522176511E-4
+0.2953882868 0.8172947451 4.917386155924556E-4
+0.3431910127 0.8019992056 4.913959276047122E-4
+0.3908126054 0.7867616235 5.717512171894665E-4
+0.4378054051 0.7695588919 6.068451594646857E-4
+0.4837881029 0.749720648 6.377944433020305E-4
+0.5282183579 0.7264849193 6.087648066447015E-4
+0.5702692606 0.6990000359 7.911894902742536E-4
+0.6106153316 0.6693389325 7.498116643615812E-4
+0.6469176706 0.6343053947 8.814829167288787E-4
+0.6791916436 0.5957398911 9.06589881739593E-4
+0.7041570561 0.5514626341 9.896140476943793E-4
+0.7299927725 0.508290595 0.0010220965
+0.7471019591 0.4600882362 0.0010554477
+0.7562299583 0.4103753615 0.0011004668
+0.7705710992 0.3606340708 0.0010500478
+0.7795080588 0.3106058428 0.0010003214
+0.7836100853 0.2605470957 0.0010969424
+0.7876936106 0.2107141265 9.424737170775808E-4
+0.7885570898 0.160617293 7.959869928726345E-4
+%0.7830116151 0.1105143616 8.103289107246018E-4
+%0.7777954439 0.0605730792 5.507278060733204E-4
+%0.7727476586 0.0122439758 2.7925244251567717E-4
+0.78 0.05 0
+0.77 0.01 0
+}{\altEightyPercentDunstable} % percentage of D (cant have numbers as table names)
+
+\pgfplotstableread{
+% D = 0.8 
+% altrusit stable
+x y err
+0.5702692606 0.6990000359 7.911894902742536E-4
+0.6106153316 0.6693389325 7.498116643615812E-4
+0.6469176706 0.6343053947 8.814829167288787E-4
+0.6791916436 0.5957398911 9.06589881739593E-4
+0.7041570561 0.5514626341 9.896140476943793E-4
+0.7299927725 0.508290595 0.0010220965
+0.7471019591 0.4600882362 0.0010554477
+0.7562299583 0.4103753615 0.0011004668
+0.7705710992 0.3606340708 0.0010500478
+0.7795080588 0.3106058428 0.0010003214
+0.7836100853 0.2605470957 0.0010969424
+0.7885570898 0.160617293 7.959869928726345E-4
+}{\altEightyPercentDstable} % percentage of D (cant have numbers as table names)
+
+\pgfplotstableread{
+% D = 0.8
+% selfish stable
+0 0.83307179 4.29651841198471E-4
+0.05 0.8215148798 4.2275368959079977E-4
+0.0984416648 0.8090696017 3.8730996678535974E-4
+0.1468689989 0.7966280055 4.427862927474237E-4
+0.1942931959 0.7802818258 4.764208946108309E-4
+0.2415639924 0.7639885202 5.174252544016855E-4
+0.2875881585 0.7440784407 5.405615281224263E-4
+0.3329425779 0.7229882408 5.440755815819676E-4
+0.3768849068 0.6989044972 6.349197669419268E-4
+0.4189342176 0.6715945047 6.961175175878865E-4
+0.4594908704 0.6422425718 7.354049610557586E-4
+0.4967363183 0.6084241432 6.937483887442554E-4
+0.5337532614 0.5748131944 7.816476019853229E-4
+0.5647493338 0.5345660345 8.24831075138914E-4
+0.5952557245 0.4949547067 8.789513004897286E-4
+}{\selEightyPercentDstable} % percentage of D (cant have numbers as table names)
+
+\pgfplotstableread{
+% D = 0.8     
+% selfish unstable
+0.5952557245 0.4949547067 8.789513004897286E-4
+0.6225969533 0.4528927115 9.202348735234035E-4
+0.6476547032 0.409539124888456 9.619282739307542E-4
+0.6678121399 0.3634899124 0.0010196567
+0.6877871017 0.317857559731739 8.484230543784277E-4
+0.7077620635 0.27222520710189 9.019544720406597E-4
+0.7231656778 0.2228728592 8.89773050997935E-4
+0.7387042629 0.1735045149 7.327787719089939E-4
+0.7537156552 0.125811139 7.212155637219616E-4
+0.7616176346 0.07588009 5.732578221315102E-4
+0.769433258 0.0264947073 3.6703368048519343E-4
+}{\selEightyPercentDunstable} % percentage of D (cant have numbers as table names)
+
+
+\pagestyle{empty}
+\begin{document}
+
+
+\begin{figure}
+\hspace*{-2cm}
+	\begin{tikzpicture}[scale=1.5]
+
+			\begin{axis}
+			[
+				%axis x line=middle, axis y line=middle, 
+				%title={Disease = 0.8},
+				xlabel={Harshness}, ylabel={Number of Agents},
+				xmin=0,ymin=-0.1,xmax=1,ymax=1,
+				%x=0.8\textwidth,y=0.8\textwidth,
+				width=0.8\textwidth,
+				ylabel style={text width=3.3cm}
+				%xtick=\empty, ytick=\empty
+			]
+			
+			% altruist 
+			\addplot[smooth, ultra thick, dashed, purple] table [] 
+				{\altEightyPercentDunstable};
+			\addplot[smooth, ultra thick, purple] table [] 
+				{\altEightyPercentDstable};
+				
+			% selfish 
+			\addplot[smooth, ultra thick, green!80] table [] 
+				{\selEightyPercentDstable};
+			\addplot[smooth, ultra thick, dashed, green!80] table [] 
+				{\selEightyPercentDunstable};
+			
+			% void stable  
+			\addplot[smooth, ultra thick, black, dashed] coordinates {(0,0) (0.78,0)};
+			\addplot[smooth, ultra thick, black] coordinates {(0.77,0) (1,0)};
+				
+			
+			% region lines
+			\addplot[black!30] coordinates { (0.79,-0.1) (0.79,1.1) }; % 4-5
+			\addplot[black!30] coordinates { (0.77,-0.1) (0.77,1.1) }; % 3-4
+			\addplot[black!30] coordinates { (0.595,-0.1) (0.595,1.1) };	% 2-3
+			\addplot[black!30] coordinates { (0.57,-0.1) (0.57,1.1) }; % 1-2	
+			% region labels
+			\node[] at (axis cs:0.9,-0.05) {$(5)$};	
+			\node[] at (axis cs:0.78,-0.05) {$(4)$};	
+			\node[] at (axis cs:0.685,-0.05) {$(3)$};	
+			\node[] at (axis cs:0.5825,-0.05) {$(2)$};
+			\node[] at (axis cs:0.29,-0.05) {$(1)$};
+			
+			%\legend{ , Altruist (N$_S$=0), , Selfish (N$_A$=0),  , ,  Empty (N$_A$=N$_S$=0)};
+			\legend{ , Altruist, Selfish, , , Empty};
+			\end{axis}
+			
+			
+
+	\end{tikzpicture}
+
+\end{figure}	
+
+\end{document}
