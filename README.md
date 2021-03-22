@@ -5,13 +5,13 @@ Example of dimensionality of experimental data in biology: microarrayCube figure
 ![Example of dimensionality of experimental data in biology](/microarrayCube/array.jpg) 
 
 Examples of 2D plots with labels 
-![2dplot](figs/2DBifurcationsAgents.pdf)
+![2dplot](Alturism/figs/2DBifurcationsAgents.pdf)
 
 Examples of 2D plots and phase space figures
-![phase space](figs/2DBifurcationsSystem.pdf)
+![phase space](Alturism/figs/2DBifurcationsSystem.pdf)
 
 Examples of a predictor corrector method
-![phase space](figs/PredictorCorrector.pdf)
+![phase space](Alturism/figs/PredictorCorrector.pdf)
 
 Examples of sanddle node characterisitics 
-![phase space](figs/SaddleNodeFigure.pdf)
+![phase space](Alturism/figs/SaddleNodeFigure.pdf)
